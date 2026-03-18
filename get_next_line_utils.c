@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 22:36:57 by haranivo          #+#    #+#             */
-/*   Updated: 2026/03/09 07:27:12 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/03/18 11:06:43 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ char	*ft_strchr(char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+			return (&s[i]);
 		i++;
 	}
 	if (s[i] != (char)c)
-		return (0);
-	return ((char *)&s[i]);
+		return (NULL);
+	return (&s[i]);
 }
 
 char	*ft_substr(char *s, unsigned int start, size_t len)

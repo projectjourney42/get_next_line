@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:21:21 by haranivo          #+#    #+#             */
-/*   Updated: 2026/03/10 10:35:25 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/03/18 11:12:14 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,33 @@ int	main(void)
 
 	/*first line*/
 	line = get_next_line(fd);
-	printf("1-----> %s", line);
+	printf("1-----> %s\n", line);
 	free(line);
 
 	/*second line*/
 	line = get_next_line(fd);
-	printf("2-----> %s", line);
+	printf("2-----> %s\n", line);
 	free(line);
 
 	/*third line*/
 	line = get_next_line(fd);
-	printf("3-----> %s", line);
+	printf("3-----> %s\n", line);
 	free(line);
+
+	/*first line*/
+	line = get_next_line(fd);
+	printf("4-----> %s\n", line);
+	free(line);
+
+	/*second line*/
+	line = get_next_line(fd);
+	printf("5-----> %s\n", line);
+	free(line);
+
+	// /*third line*/
+	// line = get_next_line(fd);
+	// printf("6-----> %s\n", line);
+	// free(line);
 
 	close(fd);
 	return (0);
