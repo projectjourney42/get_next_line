@@ -1,0 +1,82 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line2                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/17 23:18:37 by haranivo          #+#    #+#             */
+/*   Updated: 2026/03/19 19:17:27 by haranivo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+char	*add_to_stock(char *stock, char *buf)
+{
+	char	*new_stock;
+
+	new_stock = ft_strjoin(stock, buf);
+	free(stock);
+	stock = new_stock;
+	if (!stock)
+	{
+		free(stock);
+		stock = ft_strdup("");
+		return (NULL);
+	}
+}
+
+int	find_nl(char *stock)
+{
+	if (!stock)
+		return (0);
+	while (stock)
+	{
+		if (*stock == '\n')
+			return (1);
+		stock++;
+	}
+	return (0);
+}
+
+char	*print_line(char *stock)
+{
+	char	*new_stock;
+	char	*next;
+	char	*to_print;
+
+	next = ft_strchr(stock, '\n');
+	to_print = ft_substr(stock, 0, (next - stock) + 1);
+	new_stock = ft_strdup(next + 1);
+	return (to_print);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*stock;
+	char		buf[BUFFER_SIZE + 1];
+	char		*to_print;
+	char		*new_stock;
+	ssize_t		r;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	r = 1;
+	while (!find_nl(stock) && r != 0)
+	{
+		r = read(fd, buf, BUFFER_SIZE);
+		if (r == -1)
+		{
+			free(stock);
+			return (NULL);
+		}
+		buf[r] = '\0';
+		stock = add_to_stock(stock, buf);
+	}
+	if (find_nl(stock))
+		print_line(stock);
+	if (r == 0)
+		return (stock);
+	return (to_print);
+}

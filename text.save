@@ -1,0 +1,8 @@
+1
+
+
+4
+
+
+// ref '\n''EOF' => (null)
+// ref "valeur"'EOF' => trash
