@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 00:07:54 by haranivo          #+#    #+#             */
-/*   Updated: 2026/03/20 01:45:24 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/03/20 13:43:49 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ static char	*add_to_stock(char **stock, int fd)
 	ssize_t	read_value;
 
 	read_value = read(fd, buf, BUFFER_SIZE);
-	if (read_value != 0)
+	if (read_value > 0)
 	{
-		if (read_value == -1)
-			return (NULL);
 		buf[read_value] = '\0';
 		new_stock = ft_strjoin(*stock, buf);
 		free_stock(stock);
@@ -78,32 +76,37 @@ static char	*find_nl_transfer(char **stock, int fd)
 		if (ft_strcmp(new_stock, old_stock))
 			return (new_stock);
 	}
-	if (next)
-	{
-		to_print = ft_substr(*stock, 0, (next - *stock) + 1);
-		new_stock = ft_strdup(next + 1);
-		free_stock(stock);
-		*stock = new_stock;
-	}
+	to_print = ft_substr(*stock, 0, (next - *stock) + 1);
+	new_stock = ft_strdup(next + 1);
+	free_stock(stock);
+	*stock = new_stock;
 	return (to_print);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*stock;
-	char		buf[BUFFER_SIZE + 1];
+	char		*old_stock;
 	char		*to_print;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!stock)
 		stock = ft_strdup("");
+	old_stock = ft_strdup(stock);
 	stock = add_to_stock(&stock, fd);
-	to_print = find_nl_transfer(&stock, fd);
 	if (!stock)
+		return (NULL);
+	if (!ft_strchr(stock, '\n') && ft_strcmp(old_stock, stock))
 	{
+		to_print = ft_strdup(stock);
 		free_stock(&stock);
-		stock = ft_strdup("");
+	}
+	else
+		to_print = find_nl_transfer(&stock, fd);
+	if (!to_print)
+	{
+		free(to_print);
 		return (NULL);
 	}
 	return (to_print);
