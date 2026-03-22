@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnl_a_reflechir.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 00:07:54 by haranivo          #+#    #+#             */
-/*   Updated: 2026/03/22 15:05:59 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/03/22 16:14:50 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static char	*add_to_stock(char **stock, int fd)
 		new_stock = ft_strjoin(*stock, buf);
 		free_stock(stock);
 		*stock = new_stock;
-		return (*stock);
 	}
 	if (read_value == 0)
 	{
-		new_stock = ft_strdup(*stock);
-		free_stock(stock);
-		return (new_stock);
+		// new_stock = ft_strdup(*stock);
+		// free_stock(stock);
+		// return (new_stock);
+		return (NULL);
 	}
-	return (NULL);
+	return (*stock);
 }
 
 static char	*find_nl_transfer(char **stock, int fd)
@@ -67,15 +67,20 @@ static char	*find_nl_transfer(char **stock, int fd)
 	if (!*stock || !**stock)
 		return (NULL);
 	next = ft_strchr(*stock, '\n');
-	while (!ft_strchr(*stock, '\n'))
-	{
-		old_stock = ft_strdup(*stock);
-		new_stock = add_to_stock(stock, fd);
-		free_stock(stock);
-		*stock = new_stock;
-		if (ft_strcmp(new_stock, old_stock))
-			return (NULL);
-	}
+	if (!next)
+		return (*stock);
+	// while (!ft_strchr(*stock, '\n'))
+	// {
+	// 	old_stock = ft_strdup(*stock);
+	// 	new_stock = add_to_stock(stock, fd);
+	// 	// free_stock(stock);
+	// 	// *stock = new_stock;
+	// 	// if (ft_strcmp(new_stock, old_stock))
+	// 	// 	return (new_stock);
+	// 	if (!new_stock)
+	// 		to_print = old_stock;
+	// 		return (to_print);
+	// }
 	to_print = ft_substr(*stock, 0, (next - *stock) + 1);
 	new_stock = ft_strdup(next + 1);
 	free_stock(stock);
@@ -94,16 +99,17 @@ char	*get_next_line(int fd)
 	if (!stock)
 		stock = ft_strdup("");
 	old_stock = ft_strdup(stock);
-	stock = add_to_stock(&stock, fd);
-	if (!stock)
+	if (!find_nl_transfer(&stock, fd))
+		stock = add_to_stock(&stock, fd);
+	if (ft_strcmp(stock, old_stock))
 		return (NULL);
-	if (!ft_strchr(stock, '\n') && ft_strcmp(old_stock, stock))
-	{
-		to_print = ft_strdup(stock);
-		free_stock(&stock);
-	}
-	else
-		to_print = find_nl_transfer(&stock, fd);
+	// if (!ft_strchr(stock, '\n') && ft_strcmp(old_stock, stock))
+	// {
+	// 	to_print = ft_strdup(stock);
+	// 	free_stock(&stock);
+	// }
+	// else
+	to_print = find_nl_transfer(&stock, fd);
 	if (!to_print)
 	{
 		free(to_print);
