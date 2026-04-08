@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/08 00:07:54 by haranivo          #+#    #+#             */
-/*   Updated: 2026/04/08 23:12:31 by haranivo         ###   ########.fr       */
+/*   Created: 2026/04/08 16:34:40 by haranivo          #+#    #+#             */
+/*   Updated: 2026/04/08 23:15:32 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	free_stock(char **stock)
 {
@@ -68,20 +68,20 @@ static char	*find_nl_transfer(char **stock)
 
 char	*get_next_line(int fd)
 {
-	static char	*stock;
+	static char	*stock[1024];
 	char		*to_print;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!stock)
-		stock = ft_strdup("");
-	stock = add_to_stock(&stock, fd);
-	if (!stock)
+	if (!stock[fd])
+		stock[fd] = ft_strdup("");
+	stock[fd] = add_to_stock(&stock[fd], fd);
+	if (!stock[fd])
 		return (NULL);
-	to_print = find_nl_transfer(&stock);
+	to_print = find_nl_transfer(&stock[fd]);
 	if (!to_print)
 	{
-		free_stock(&stock);
+		free_stock(&stock[fd]);
 		free(to_print);
 		return (NULL);
 	}
