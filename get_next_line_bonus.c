@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:34:40 by haranivo          #+#    #+#             */
-/*   Updated: 2026/04/08 23:15:32 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:48:50 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static char	*find_nl_transfer(char **stock)
 		return (new_stock);
 	}
 	to_print = ft_substr(*stock, 0, (next - *stock) + 1);
+	if (*(next + 1) == '\0')
+		return (free_stock(stock), to_print);
 	new_stock = ft_strdup(next + 1);
 	free_stock(stock);
 	*stock = new_stock;
