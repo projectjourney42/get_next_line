@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:38:31 by haranivo          #+#    #+#             */
-/*   Updated: 2026/04/08 16:50:53 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/04/09 13:44:52 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*ft_strdup(char *str)
 		return (NULL);
 	len = ft_strlen(str);
 	dup = malloc(sizeof(char) * (len + 1));
+	if (!dup)
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{

@@ -31,13 +31,13 @@ The bonus part of the `get_next_line` function enhances its capability to handle
 Compile the mandatory version with:
 
 ```bash
-cc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=42
+cc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c main.c -D BUFFER_SIZE=42
 ```
 
 Compile the bonus version with:
 
 ```bash
-cc -Wall -Wextra -Werror get_next_line_bonus.c get_next_line_utils_bonus.c -D BUFFER_SIZE=42
+cc -Wall -Wextra -Werror get_next_line_bonus.c get_next_line_utils_bonus.c main_bonus.c -D BUFFER_SIZE=42
 ```
 
 > You can adjust `BUFFER_SIZE` via the `-D BUFFER_SIZE=<value>` compile-time definition.
@@ -46,28 +46,10 @@ cc -Wall -Wextra -Werror get_next_line_bonus.c get_next_line_utils_bonus.c -D BU
 
 Use the compiled executable in a test program or manually call `get_next_line()` from a C program that opens a file descriptor.
 
-Example usage in a simple test program:
+To run a program for a test, you must include
 
 ```c
-#include <fcntl.h>
-#include <stdio.h>
 #include "get_next_line.h"
-
-int main(void)
-{
-    int fd = open("example.txt", O_RDONLY);
-    char *line;
-
-    if (fd < 0)
-        return 1;
-    while ((line = get_next_line(fd)))
-    {
-        printf("%s", line);
-        free(line);
-    }
-    close(fd);
-    return 0;
-}
 ```
 
 ## Algorithm
