@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:34:40 by haranivo          #+#    #+#             */
-/*   Updated: 2026/04/09 16:07:51 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/04/09 16:56:16 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*add_to_stock(char **stock, int fd)
 
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
-		return (NULL);
+		return (free_stock(stock), NULL);
 	read_value = 1;
 	while (*stock && !ft_strchr(*stock, '\n') && read_value > 0)
 	{
