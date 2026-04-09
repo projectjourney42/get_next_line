@@ -6,7 +6,11 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:34:40 by haranivo          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/04/09 16:56:16 by haranivo         ###   ########.fr       */
+=======
+/*   Updated: 2026/04/09 16:07:51 by haranivo         ###   ########.fr       */
+>>>>>>> 37457c9 (deleted all static in fuction and added all fucnction to the .h)
 /*                                                                            */
 /* ************************************************************************** */
 
