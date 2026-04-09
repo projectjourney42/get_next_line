@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:34:40 by haranivo          #+#    #+#             */
-/*   Updated: 2026/04/09 15:48:50 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/04/09 16:07:51 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_stock(char **stock)
 	*stock = NULL;
 }
 
-static char	*add_to_stock(char **stock, int fd)
+char	*add_to_stock(char **stock, int fd)
 {
 	char	*buf;
 	char	*new_stock;
@@ -44,7 +44,7 @@ static char	*add_to_stock(char **stock, int fd)
 	return (*stock);
 }
 
-static char	*find_nl_transfer(char **stock)
+char	*find_nl_transfer(char **stock)
 {
 	char	*next;
 	char	*new_stock;
