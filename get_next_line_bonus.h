@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:40:26 by haranivo          #+#    #+#             */
-/*   Updated: 2026/04/09 16:07:32 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:38:56 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 25
+# endif
+
+# if BUFFER_SIZE > 100000000
+#  undef BUFFER_SIZE 
+#  define BUFFER_SIZE 1024
 # endif
 
 # include <stdlib.h>

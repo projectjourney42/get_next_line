@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/08 00:07:54 by haranivo          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/04/09 16:55:47 by haranivo         ###   ########.fr       */
-=======
-/*   Updated: 2026/04/09 16:03:22 by haranivo         ###   ########.fr       */
->>>>>>> 37457c9 (deleted all static in fuction and added all fucnction to the .h)
+/*   Created: 2026/04/10 17:16:45 by haranivo          #+#    #+#             */
+/*   Updated: 2026/04/10 18:39:06 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +35,8 @@ char	*add_to_stock(char **stock, int fd)
 			break ;
 		buf[read_value] = '\0';
 		new_stock = ft_strjoin(*stock, buf);
+		if (!new_stock)
+			return (free_stock(stock), free(buf), NULL);
 		free_stock(stock);
 		*stock = new_stock;
 	}

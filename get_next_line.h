@@ -6,7 +6,7 @@
 /*   By: haranivo <haranivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:40:47 by haranivo          #+#    #+#             */
-/*   Updated: 2026/04/09 16:03:29 by haranivo         ###   ########.fr       */
+/*   Updated: 2026/04/10 21:11:55 by haranivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@
 #  define BUFFER_SIZE 25
 # endif
 
+# if BUFFER_SIZE > 100000000
+#  undef BUFFER_SIZE 
+#  define BUFFER_SIZE 1024
+# endif
+
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 char	*get_next_line(int fd);
 char	*add_to_stock(char **stock, int fd);
